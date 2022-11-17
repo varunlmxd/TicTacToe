@@ -2,18 +2,18 @@
 def print_l(list):
     print("""
                          |       |
-                    {0}    |   {1}   |  {2}
+                     {0}   |   {1}   |   {2}
                          |       |
                  ------------------------              
                          |       |
-                    {3}    |   {4}   |  {5}
+                     {3}   |   {4}   |   {5}
                          |       |
                  ------------------------
                          |       |
-                    {6}    |   {7}   |  {8}
+                     {6}   |   {7}   |   {8}
                          |       |
   """.format(list[0],list[1],list[2],list[3],list[4],list[5],list[6],list[7],list[8]))
-"""-------------------------------------------------------------------------------------"""
+
 def check_l(list):
     c=0
     if(list[0]==list[1]==list[2]):
@@ -33,7 +33,7 @@ def check_l(list):
     elif(list[2]==list[4]==list[6]):
         c=winner_l(list[4])
     return c
-"""-------------------------------------------------------------------------------------"""
+
 def winner_l(result):
     if(player_1==result):
         print("Player 1 is the winner")
@@ -41,7 +41,6 @@ def winner_l(result):
     elif(player_2==result):
         print("Player 2 is the winner")
         return 1
-"""-------------------------------------------------------------------------------------"""
 
 list=['1','2','3','4','5','6','7','8','9']
 print("Choose either from X or O")
@@ -57,16 +56,22 @@ count=0
 print_l(list)
 while(count<9):
     if(count%2==0):
-        index=int(input(f"Player 1 choose the index position for {player_1} to be placed"))
-        list[index-1]=player_1
+        index=input(f"Player 1 choose the index position for {player_1} to be placed: ")
+        print(index)
+        if index not in list:
+            print("Invalid index!!!\nEnter again")
+            continue    
+        list[int(index)-1]=player_1
     else:
-        index=int(input(f"Player 2 choose the index position for {player_2} to be placed"))
-        list[index-1]=player_2
+        index=input(f"Player 2 choose the index position for {player_2} to be placed: ")
+        if index not in list:
+            print("Invalid index!!!\nEnter again")
+            continue
+        list[int(index)-1]=player_2
+    print_l(list)
     check=check_l(list)
     count=count+1
-    print_l(list)
     if(check!=0):
-        break;
-    
+        break
 if(count==9):
     print("Game is Draw")
